@@ -1,0 +1,6 @@
+{
+  "name": "One Adado Electricals Ventures",
+  "description": "Domestic and Industrial Electrical Works in Dome Pillar 2, Ghana. House wiring, factory electrical works, sawmill and corn mill installations, electric fencing, pole extensions, and maintenance.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
