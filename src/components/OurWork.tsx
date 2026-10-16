@@ -1,11 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { Eye, X, Shield, ArrowUpRight } from 'lucide-react';
 
+import factoryImg from '../assets/images/service_factory_industrial_1792151883138.jpg';
+import houseWiringImg from '../assets/images/service_house_wiring_1792151884221.jpg';
+import securityFencingImg from '../assets/images/service_security_fencing_1792151884706.jpg';
+import maintenanceImg from '../assets/images/hero_electrical_work_1792151882355.jpg';
+
 interface WorkItem {
   id: string;
   title: string;
   category: string;
   imageSrc: string;
+  fallbackSrc: string;
   description: string;
 }
 
@@ -14,7 +20,8 @@ const GALLERY_ITEMS: WorkItem[] = [
     id: 'work-1',
     title: 'Industrial Factory Power Distribution & Cable Terminations',
     category: 'Factory electrical works',
-    imageSrc: '/src/assets/images/service_factory_industrial_1792151883138.jpg',
+    imageSrc: factoryImg || '/images/service_factory_industrial.jpg',
+    fallbackSrc: '/images/service_factory_industrial.jpg',
     description:
       'High-capacity three-phase electrical control panel assembly, cable trays, and motor power routing for industrial manufacturing plants.',
   },
@@ -22,7 +29,8 @@ const GALLERY_ITEMS: WorkItem[] = [
     id: 'work-2',
     title: 'Domestic House Wiring & Flush-Mounted Consumer Unit',
     category: 'House wiring',
-    imageSrc: '/src/assets/images/service_house_wiring_1792151884221.jpg',
+    imageSrc: houseWiringImg || '/images/service_house_wiring.jpg',
+    fallbackSrc: '/images/service_house_wiring.jpg',
     description:
       'Neat conduit embedding, multi-circuit consumer unit installation, and modern domestic switchgear for residential buildings.',
   },
@@ -30,7 +38,8 @@ const GALLERY_ITEMS: WorkItem[] = [
     id: 'work-3',
     title: 'Perimeter Wall Security Electric Fence Installation',
     category: 'Security electric fencing',
-    imageSrc: '/src/assets/images/service_security_fencing_1792151884706.jpg',
+    imageSrc: securityFencingImg || '/images/service_security_fencing.jpg',
+    fallbackSrc: '/images/service_security_fencing.jpg',
     description:
       'Multi-strand high-tensile wire security electric fencing with spring tensioners and warning signage mounted along perimeter walling.',
   },
@@ -38,7 +47,8 @@ const GALLERY_ITEMS: WorkItem[] = [
     id: 'work-4',
     title: 'Comprehensive Switchgear Testing & Electrical Inspection',
     category: 'Electrical maintenance',
-    imageSrc: '/src/assets/images/hero_electrical_work_1792151882355.jpg',
+    imageSrc: maintenanceImg || '/images/hero_electrical_work.jpg',
+    fallbackSrc: '/images/hero_electrical_work.jpg',
     description:
       'Hands-on diagnostic testing, busbar load measurements, and preventive maintenance on high-voltage distribution boards.',
   },
@@ -111,6 +121,11 @@ export const OurWork: React.FC<OurWorkProps> = ({ onRequestQuote }) => {
                   alt={item.title}
                   className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
                   referrerPolicy="no-referrer"
+                  onError={(e) => {
+                    if (e.currentTarget.src !== item.fallbackSrc) {
+                      e.currentTarget.src = item.fallbackSrc;
+                    }
+                  }}
                 />
                 <div className="absolute inset-0 bg-[#18266B]/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
                   <div className="w-10 h-10 rounded-full bg-white/90 text-[#18266B] flex items-center justify-center shadow-lg">
@@ -181,6 +196,11 @@ export const OurWork: React.FC<OurWorkProps> = ({ onRequestQuote }) => {
                 alt={activeItem.title}
                 className="w-full h-full object-cover"
                 referrerPolicy="no-referrer"
+                onError={(e) => {
+                  if (e.currentTarget.src !== activeItem.fallbackSrc) {
+                    e.currentTarget.src = activeItem.fallbackSrc;
+                  }
+                }}
               />
             </div>
 

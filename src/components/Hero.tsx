@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import { Phone, MapPin, ArrowRight, ShieldCheck, Zap } from 'lucide-react';
+import heroImage from '../assets/images/hero_electrical_work_1792151882355.jpg';
 
 interface HeroProps {
   onRequestQuote: () => void;
 }
 
 export const Hero: React.FC<HeroProps> = ({ onRequestQuote }) => {
+  const [imgSrc, setImgSrc] = useState<string>(heroImage || '/images/hero_electrical_work.jpg');
   const [imageError, setImageError] = useState(false);
 
   return (
@@ -80,11 +82,17 @@ export const Hero: React.FC<HeroProps> = ({ onRequestQuote }) => {
               <div className="relative rounded-2xl overflow-hidden bg-white shadow-xl border-2 border-white ring-1 ring-slate-200/70">
                 {!imageError ? (
                   <img
-                    src="/src/assets/images/hero_electrical_work_1792151882355.jpg"
+                    src={imgSrc}
                     alt="One Adado Electricals Ventures master electrician inspecting industrial switchgear and power distribution board"
                     className="w-full h-80 sm:h-96 object-cover object-center"
                     referrerPolicy="no-referrer"
-                    onError={() => setImageError(true)}
+                    onError={() => {
+                      if (imgSrc !== '/images/hero_electrical_work.jpg') {
+                        setImgSrc('/images/hero_electrical_work.jpg');
+                      } else {
+                        setImageError(true);
+                      }
+                    }}
                   />
                 ) : (
                   <div className="w-full h-80 sm:h-96 bg-gradient-to-br from-[#18266B] to-[#0d1640] p-8 flex flex-col justify-center items-center text-white text-center">

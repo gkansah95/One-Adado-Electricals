@@ -1,0 +1,18 @@
+{
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist",
+  "rewrites": [
+    {
+      "source": "/api/contact/status",
+      "destination": "/api/contact/status"
+    },
+    {
+      "source": "/api/contact",
+      "destination": "/api/contact"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ]
+}
